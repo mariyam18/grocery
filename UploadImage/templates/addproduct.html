@@ -1,0 +1,124 @@
+{% include "base.html" %}
+
+
+{% block prod %}
+
+<style>
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+</style>
+<div class="panel=heading">
+
+<h2>Add product <a class="pull-right btn btn-success" href="/">Back</a> </h2>
+
+</div>
+
+
+
+<div class="panel-body">
+
+<form action="{{ url_for('insert') }}" method="post">
+<div class="form-group">
+
+    <label for="name">product name</label>
+    <input type="text" class="form-control" name="name" id="name" required = "1"  >
+
+</div>
+
+
+
+    <div class="form-group">
+
+    <label for="price">product price</label>
+    <input type="text" class="form-control" name="price" id="price" required = "1" >
+
+</div>
+
+
+
+
+        <div class="form-group">
+
+    <label for="available">available</label>
+    <input type="text" class="form-control" name="available" id="available" required = "1"  >
+
+</div>
+
+<div class="form-group">
+
+    <label for="manufacture">manufacture date</label>
+    <input type="text" class="form-control" name="manufacture" id="manufacture" required = "1"  >
+
+</div>
+
+<div class="form-group">
+
+    <label for="available">expiry</label>
+    <input type="text" class="form-control" name="available" id="available" required = "1"  >
+
+</div>
+
+<div>
+                  <label>Weight:</label>
+
+		<div class="form-group">
+      		 <select id="weight" name="weight">
+		  <option value="kg">kg</option>
+		  <option value="dozen">dozen</option>
+		  <option value="unit">unit</option>
+		  <option value="ml">ml</option>
+		
+		</select>
+	      </div>
+
+<div>
+                  <label>Category:</label>
+
+		<div class="form-group">
+      		 <select id="category" name="category">
+		  <option value="House hold">House hold</option>
+		  <option value="fruit">Fruits</option>
+		  <option value="vegetable">Vegetables</option>
+		  <option value="personal care">Personal Care</option>
+		  <option value="beverages">Beverages</option>
+		  <option value="cold drink">Cold Drink</option>
+		</select>
+	      </div>
+
+
+
+
+    <div class="form-group">
+        <input type="hidden" name="id" value="1">
+
+     <input type="hidden" name="action" value="edit">
+     <input type="submit" class="btn btn-success" name="submit" value="Add Student">
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

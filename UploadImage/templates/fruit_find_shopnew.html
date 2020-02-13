@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!--have to add-->
+{% block content %}
+    <div class="col-md-3 text-center" style="cursor:pointer" >
+        <!--<a href="{{ url_for('fruit_find_shop',ty=data[0][1]) }}"></a>-->
+        <img class="images" style="width:300px ;height:300px" src="{{ data[0][0] }}">
+        <h4>{{ data[0][2] }}</h4>
+        <h5>RS-{{ data[0][3] }} </h5>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i class="fa fa-search"></i> Add to cart</button>
+        <div class="modal fade product_view" id="product_view">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                        <h3 class="modal-title">Select shop from where you want to buy product</h3>
+                        <div class="outer col-md-9">
+                            {% set i=0 %}
+                            {% for fal in data %}
+                            <div>
+                            <form id="{{fal[2]}}" method="POST" action="{{ url_for('addHome',name=fal[2],shopname=fal[6]) }}">
+                                <div class="my col-md-9" style="cursor:pointer" >
+                                    <div>
+                                        <h5 class="avail">Available - {{fal[4]}} {{ fal[5] }} </h5>
+                                        <h5 class="avail">Add Product</h5><input style="height: 20px;width: 50px" class="in" value="0" type="number" name="{{fal[1]}}" min="1" max="{{fal[4]}}">
+                                    </div>
+                                    <a href="#" onclick="document.getElementById('{{fal[2]}}').submit();"><h4>Shop Name - {{ fal[6] }}</h4></a>
+                                    <h5>Shop Address-{{ fal[7]}} {{fal[8]}} {{fal[9]}} {{fal[10] }} </h5>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+{% endfor %}
+{% endblock %}
+
+{% block fruit_find_shop %}
+
+{% endblock %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login-signup</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="static/css/login.css">
+</head>
+
+<body>
+  <div class="container">
+	<form method='POST' action="{{ url_for('register') }}" class="signUp">
+		{{ form.hidden_tag() }}
+		<h3>Create Your Account</h3>
+        <img class="logo" src="/static/img/shop2.png">
+        <!--
+		<a href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+		 class="google btn">
+			<i class="fa fa-google fa-fw"></i> Login with Google+
+		</a>
+        <br>
+        <small>OR</small>
+        -->
+		<div class="form-group">
+                {% if form.email.errors %}
+                    {{ form.email(class="reg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {%  for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="reg",placeholder="Email", autocomplete='off') }}
+                {% endif %}
+       </div>
+       <div class="form-group">
+            {% if form.password.errors %}
+                {{ form.password(class="reg is-invalid")}}
+                <div class="invalid-feedback">
+                    {%  for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+           {% else %}
+                {{ form.password(class="reg",placeholder="Password") }}
+           {% endif %}
+       </div>
+       <div class="form-group">
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="reg is-invalid")}}
+                <div class="invalid-feedback">
+                    {%  for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+           {% else %}
+                {{ form.confirm_password(class="reg",placeholder="Confirm_Password") }}
+           {% endif %}
+       </div>
+		<button class="form-btn sx log-in" type="button">Log In</button>
+		<button class="form-btn dx" type="submit">Sign Up</button>
+	</form>
+	<form method='POST' action="{{ url_for('login') }}" class="signIn">
+        <div class="log2"><h3>Login Here</h3></div>
+        <img class="logo" src="/static/img/shop2.png">
+
+        <!--
+		<a href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+		 class="google btn">
+			<i class="fa fa-google fa-fw"></i> Login with Google+ </a>
+         <br>
+        <small>OR</small>
+        -->
+        <div class="form-group">
+            {% if form.email.errors %}
+                {{ form.email(class="reg is-invalid")}}
+                <div class="invalid-feedback">
+                    {%  for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="reg",placeholder="Email", autocomplete='off') }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {% if form.password.errors %}
+                {{ form.password(class="reg is-invalid")}}
+                <div class="invalid-feedback">
+                    {%  for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+           {% else %}
+                {{ form.password(class="reg",placeholder="Password") }}
+           {% endif %}
+        </div>
+		<button class="form-btn sx back" type="button">Sign Up</button>
+		<button class="form-btn dx" type="submit">Log In</button>
+	</form>
+</div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script  src="static/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  padding-left: 20px;
+}
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+body{
+    font-size: 3em;
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="product_view" id="product_view">
+        <div class="dialog">
+            <div class="content">		
+            {% if 'cart_item' in session %}
+                <a id="btnEmpty" href="{{ url_for('empty_cart') }}">Empty Cart</a>
+                <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                <tbody>
+                    <tr>
+                        <th style="text-align:center;" width="7%">Name</th>
+                        <!--<th style="text-align:left;">Code</th>-->
+                        <th style="text-align:center;" width="5%">Quantity</th>
+                        <th style="text-align:center;" width="5%">Unit Price</th>
+                        <th style="text-align:center;" width="5%">Price</th>
+                        <th style="text-align:center;" width="10%">Shopname</th>
+                        <th style="text-align:center;" width="15%">Shop Address</th>
+                       <!-- <th style="text-align:right;" width="10%">Shop City</th>
+                        <th style="text-align:right;" width="10%">Shop Dist.</th>
+                        <th style="text-align:right;" width="10%">Shop State</th>-->
+                        <th style="text-align:center;" width="5%">Remove</th>
+                    </tr>
+                    {% for key, val in session['cart_item'].items() %}
+                        {% set quantity = session['cart_item'][key]['quantity'] %}
+                        {% set price = session['cart_item'][key]['price'] %}
+                        {% set item_price = session['cart_item'][key]['total_price'] %}					
+                        <tr>
+                            <!--<td><img src="/static/images/{{ session['cart_item'][key]['image'] }}" class="cart-item-image" />{{ session['cart_item'][key]['name'] }}</td>-->
+                            <td style="text-align:center;">{{ session['cart_item'][key]['name'] }}</td>
+                            <td style="text-align:center;">{{ quantity }}</td>
+                            <td  style="text-align:center;">&#8377; {{ price }}</td>
+                            <td  style="text-align:center;">&#8377; {{ item_price }}</td>
+                            <td  style="text-align:center;"> {{session['cart_item'][key]['shopname']}}</td>
+                            <td  style="text-align:center;"> {{session['cart_item'][key]['shop_add']}} {{session['cart_item'][key]['shop_city']}}</td>
+                            <!--<td  style="text-align:right;"> {{session['cart_item'][key]['shop_city']}}</td>
+                            <td  style="text-align:right;"> {{session['cart_item'][key]['shop_district']}}</td>
+                            <td  style="text-align:right;"> {{session['cart_item'][key]['shop_state']}}</td>-->
+
+                            <td style="text-align:center;">
+                                <a href="{{ url_for('delete_product', name=session['cart_item'][key]['name']) }}" class="btnRemoveAction">
+                                    <img src="/static/images/icon-delete.png" alt="Remove Item" />
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="" style="text-align:center;">Total:</td>
+                        <td style="text-align:center;">{{ session['all_total_quantity'] }}</td>
+                        <td style="text-align:center;" colspan=""><strong>&#8377; {{ session['all_total_price'] }}</strong></td>
+                    </tr>
+                </tbody>
+                </table>
+            {% else: %}
+                <div class="no-records">Your Cart is Empty</div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+<div class="container">
+    <div><h1>Delivery Address</h1></div>
+    <form method='POST' action="{{ url_for('confirm') }}" class="signUp">
+      <div class="row">
+        <div class="col-25">
+          <label for="subject">Lane 1</label>
+        </div>
+        <div class="col-75">
+          <textarea id="subject" name="lane1" placeholder="Address" style="height:200px"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subject">Lane 2</label>
+        </div>
+        <div class="col-75">
+          <textarea id="subject" name="lane2" placeholder="Address" style="height:200px"></textarea>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-25">
+            <label for="subject">City</label>
+          </div>
+          <div class="col-75">
+            <textarea id="subject" name="city" placeholder="Address" style="height:200px"></textarea>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="subject">State</label>
+            </div>
+            <div class="col-75">
+              <textarea id="subject" name="state" placeholder="Address" style="height:200px"></textarea>
+            </div>
+          </div>
+      
+      <div class="row">
+          <div class="col-25">
+              <label for="subject">Payment mode</label>
+            </div>
+            <div class="col-75">
+              <label for="subject">Cash on Delivery</label>
+            </div>
+      </div>
+      <div class="row">
+          <button class="form-btn" type="submit">Confirm</button>
+      </div>
+    </form>
+</div>
+
+</body>
+</html>
+{% endblock %}

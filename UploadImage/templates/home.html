@@ -1,0 +1,413 @@
+<!--Mains-->
+{% extends "base.html"%}
+
+{%  block cart %}
+<div id="shopping-cart">
+        <!--<div class="txt-heading">Shopping Cart</div>-->
+        <div style="float: right; cursor: pointer;width: 110px;">
+            <span class="glyphicon glyphicon-shopping-cart" data-toggle="modal" data-target="#product_view"><span class="badge badge-notify my-cart-badge"></span>
+        </div>
+        <div class="modal fade product_view" id="product_view">
+            <div class="modal-dialog">
+                <div class="modal-content">		
+                {% if 'cart_item' in session %}
+                    <a id="btnEmpty" href="{{ url_for('empty_cart') }}">Empty Cart</a>
+                    <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                    <tbody>
+                        <tr>
+                            <th style="text-align:center;" width="7%">Name</th>
+                            <!--<th style="text-align:left;">Code</th>-->
+                            <th style="text-align:center;" width="5%">Quantity</th>
+                            <th style="text-align:center;" width="5%">Unit Price</th>
+                            <th style="text-align:center;" width="5%">Price</th>
+                            <th style="text-align:center;" width="10%">Shopname</th>
+                            <th style="text-align:center;" width="15%">Shop Address</th>
+                           <!-- <th style="text-align:right;" width="10%">Shop City</th>
+                            <th style="text-align:right;" width="10%">Shop Dist.</th>
+                            <th style="text-align:right;" width="10%">Shop State</th>-->
+                            <th style="text-align:center;" width="5%">Remove</th>
+                        </tr>
+                        {% for key, val in session['cart_item'].items() %}
+                            {% set quantity = session['cart_item'][key]['quantity'] %}
+                            {% set price = session['cart_item'][key]['price'] %}
+                            {% set item_price = session['cart_item'][key]['total_price'] %}					
+                            <tr>
+                                <!--<td><img src="/static/images/{{ session['cart_item'][key]['image'] }}" class="cart-item-image" />{{ session['cart_item'][key]['name'] }}</td>-->
+                                <td style="text-align:center;">{{ session['cart_item'][key]['name'] }}</td>
+                                <td style="text-align:center;">{{ quantity }}</td>
+                                <td  style="text-align:center;">&#8377; {{ price }}</td>
+                                <td  style="text-align:center;">&#8377; {{ item_price }}</td>
+                                <td  style="text-align:center;"> {{session['cart_item'][key]['shopname']}}</td>
+                                <td  style="text-align:center;"> {{session['cart_item'][key]['shop_add']}} {{session['cart_item'][key]['shop_city']}}</td>
+                                <!--<td  style="text-align:right;"> {{session['cart_item'][key]['shop_city']}}</td>
+                                <td  style="text-align:right;"> {{session['cart_item'][key]['shop_district']}}</td>
+                                <td  style="text-align:right;"> {{session['cart_item'][key]['shop_state']}}</td>-->
+
+                                <td style="text-align:center;">
+                                    <a href="{{ url_for('delete_product', name=key) }}" class="btnRemoveAction">
+                                        <img src="/static/images/icon-delete.png" alt="Remove Item" />
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="" style="text-align:center;">Total:</td>
+                            <td style="text-align:center;">{{ session['all_total_quantity'] }}</td>
+                            <td style="text-align:center;" colspan=""><strong>&#8377; {{ session['all_total_price'] }}</strong></td>
+                            <td><a id="btnEmpty" href="{{ url_for('checkout') }}">Proceed to checkout</a></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                {% else: %}
+                    <div class="no-records">Your Cart is Empty</div>
+                {% endif %}
+                </div>
+            </div>
+	    </div>
+</div>
+{% endblock %}
+{% block carausal %}
+
+<div class="container">
+  <div class="row">
+    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+        <div class="MultiCarousel-inner">
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Fruits') }}';">
+                <div class="pad15">
+                 <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/Apple.jpeg')}}">
+                 <h5>Fruits</h5>
+                </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Vegetables') }}';">
+              <div class="pad15">
+               <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/vegetables.jpeg')}}">
+               <h5>Vegetables</h5>
+              </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Grocerystaple') }}';" >
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/grocereystaple.jpg')}}">
+                <h5>Grocery&Staples</h5>
+            </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Household') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/household.jpeg')}}">
+                <h5>Household Needs</h5>
+            </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Personal') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/personal.jpeg')}}">
+                <h5>Personal Care</h5>
+            </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Beverages') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/beverages.jpeg')}}">
+                <h5>Beverages</h5>
+            </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Baby') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/baby.jpeg')}}">
+                <h5>Baby&Kids</h5>
+            </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Snacks') }}';">
+              <div class="pad15">
+                  <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/snacks.jpeg')}}">
+                  <h5>Snacks&Chocolates</h5>
+              </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Noodle') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/noodle.jpeg')}}">
+                <h5>Noodles&Instant Food</h5>
+              </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Breakfast') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/breakfast.jpeg')}}">
+                <h5>Breakfast&Dairy</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15" onclick="location.href='{{ url_for('product_find',ty='Home') }}';">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/home.jpeg')}}">
+                <h5>Home&Kitchen</h5>
+              </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Pet') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="{{ url_for('static',filename='uploads/pet.jpeg')}}">
+                <h5>Pet Care</h5>
+              </div>
+            </div>
+            <div class="item" onclick="location.href='{{ url_for('product_find',ty='Frozen') }}';">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;" src="{{ url_for('static',filename='uploads/frozen.jpeg')}}">
+                <h5>Frozen Food</h5>
+              </div>
+            </div>
+        </div>
+        <button class="btn btn-primaryy leftLst"><</button>
+        <button class="btn btn-primaryy rightLst">></button>
+    </div>
+  </div>
+ </div>
+{% endblock %}
+{% block best_categories %}
+<section class="wrapper">
+        <div class="container-fostrap">
+          <div class="content">
+            <h3 style="padding-right: 800px;">Best Selling Categories</h3>
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card" onclick="location.href='{{ url_for('fresh_healthy') }}';">
+                        <img class="img-card" src="{{ url_for('static',filename='uploads/fresh.png') }}">
+                          <div class="card-content">
+                          <h4 class="card-title">
+                              Eat Fresh, Stay Healthy 
+                          </h4>
+                          </div>
+                          <div class="card-read-more">
+                              <a class="btn btn-link btn-block">Buy Now</a>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card" onclick="location.href='{{ url_for('care') }}';">
+                        <img class="img-card" src="{{ url_for('static',filename='uploads/personal.png') }}">
+                          <div class="card-content">
+                              <h4 class="card-title">
+                                  Care for Your Own
+                              </h4>
+                              <p class="">
+                              </p>
+                          </div>
+                          <div class="card-read-more">
+                              <a class="btn btn-link btn-block">Buy Now</a>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card" onclick="location.href='{{ url_for('spice') }}';">
+                        <img class="img-card" src="{{ url_for('static',filename='uploads/spice.png') }}">
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                Spice Up Your Stomach
+                            </h4>
+                        </div>
+                        <div class="card-read-more">
+                            <a class="btn btn-link btn-block">Buy Now</a>
+                        </div>  
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>  
+    </div>
+</section>
+{% endblock %}
+{% block categories %}
+<section id="team" class="pb-5">
+  <h4 class="title">All Categories</h4>
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                      <div class="frontside">
+                          <div class="card">
+                              <div class="card-body text-center">
+                                  <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/fruits.jpeg') }}" alt="card image" style="width: 150px; height: 150px"></p>
+                                  <h1 class="card-title" style="padding-top: 30px;">Fruits</h1>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="backside">
+                          <div class="card">
+                              <div class="card-body text-center mt-4">
+                                  <h3 style="padding-top: 50px;">Let’s eat colorful fruit and veggies to protect against breast cancer risk</h3>
+                                  <a href="{{ url_for('product_find',ty='Fruits') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                      <div class="mainflip">
+                          <div class="frontside">
+                              <div class="card">
+                                  <div class="card-body text-center">
+                                      <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/vegetables.jpeg') }}" alt="card image" style="width: 300px; height: 150px"></p>
+                                      <h1 class="card-title" style="padding-top: 30px;">Vegetables</h1>
+                  
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="backside">
+                              <div class="card">
+                                  <div class="card-body text-center mt-4">
+                                      
+                                      <h3 style="padding-top: 50px;">Nothing will benefit human health and increase the chances for survival of life on Earth as much as the evolution to a vegetarian diet</h3>
+                                      <a href="{{ url_for('product_find',ty='Vegetables') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+  
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                      <div class="frontside">
+                          <div class="card">
+                              <div class="card-body text-center">
+                                  <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/beverages.jpg') }}" alt="card image" style="width: 150px; height: 150px"></p>
+                                  <h1 class="card-title" style="padding-top: 30px;">Beverages</h1>
+              
+                              </div>
+                          </div>
+                      </div>
+                      <div class="backside">
+                          <div class="card">
+                              <div class="card-body text-center mt-4">
+                                  
+                                  <h3 style="padding-top: 50px;">There's not a man, woman or child on the face of the earth who doesn't enjoy a tasty beverage</h3>
+                                  <a href="{{ url_for('product_find',ty='Beverages') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                      <div class="frontside">
+                          <div class="card">
+                              <div class="card-body text-center">
+                                  <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/household.jpg') }}" alt="card image" style="width: 150px; height: 150px"></p>
+                                  <h1 class="card-title" style="padding-top: 30px;">Household Needs</h1>
+              
+                              </div>
+                          </div>
+                      </div>
+                      <div class="backside">
+                          <div class="card">
+                              <div class="card-body text-center mt-4">
+                                  
+                                  <h3 style="padding-top: 50px;">Every man's reputation proceeds from those of his own household</h3>
+                                  <a href="{{ url_for('product_find',ty='Householdneeds') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                      <div class="mainflip">
+                          <div class="frontside">
+                              <div class="card">
+                                  <div class="card-body text-center">
+                                      <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/baby.jpg') }}" alt="card image" style="width: 150px; height: 150px"></p>
+                                      <h1 class="card-title" style="padding-top: 30px;">Baby&Kids</h1>
+                  
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="backside">
+                              <div class="card">
+                                  <div class="card-body text-center mt-4">  
+                                      <h3 style="padding-top: 50px;">It's important to give your babies the best of all </h3>
+                                      <a href="{{ url_for('product_find',ty='Babyandkids') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                      <div class="frontside">
+                          <div class="card">
+                              <div class="card-body text-center">
+                                  <p><img class=" img-fluid" src="{{ url_for('static',filename='uploads/breakfast.jpg') }}" alt="card image" style="width: 150px; height: 150px"></p>
+                                  <h1 class="card-title" style="padding-top: 30px;">Breakfast</h1>
+              
+                              </div>
+                          </div>
+                      </div>
+                      <div class="backside">
+                          <div class="card">
+                              <div class="card-body text-center mt-4">
+                                  
+                                  <h3 style="padding-top: 50px;">There's nothing like starting the day with a healthy, filling breakfast smoothie</h3>
+                                  <a href="{{ url_for('product_find',ty='Breakfast') }}" class="btn btn-primary btn-sm" style="top: 50px">Buy Now</a>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}
+{% block best_item %}
+<section>
+    <h4>Best Selling Items</h4>
+    <div class="container">
+        <div class="row"> 
+            <div class="cards">
+                <img src="{{ url_for('static',filename='uploads/sunflower.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="cards-title">Fortune Sunlite Refined Sunflower Oil</p>
+                  <p class="cards-text">₹107<br>1L</p>
+                  <a href="#" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
+            <div class="cards">
+                <img src="{{ url_for('static',filename='uploads/sunflower.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="cards-title">Fortune Sunlite Refined Sunflower Oil</p>
+                  <p class="cards-text">₹107<br>1L</p>
+                  <a href="#" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
+            <div class="cards">
+                <img src="{{ url_for('static',filename='uploads/sunflower.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="cards-title">Fortune Sunlite Refined Sunflower Oil</p>
+                  <p class="cards-text">₹107<br>1L</p>
+                  <a href="#" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
+            <div class="cards">
+                <img src="{{ url_for('static',filename='uploads/sunflower.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="cards-title">Fortune Sunlite Refined Sunflower Oil</p>
+                  <p class="cards-text">₹107<br>1L</p>
+                  <a href="#" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        <a href="#" style="color: #46a093; position: right;">View All ></a>
+    </div>
+</section>
+{% endblock %}

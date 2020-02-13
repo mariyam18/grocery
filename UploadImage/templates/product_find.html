@@ -1,0 +1,19 @@
+<!--Mains-->
+{% extends "base.html" %}
+
+{% block content %}
+{% for fal in data %}
+    <div class="col-md-3 text-center" style="cursor:pointer" >
+        <a href="{{ url_for('product_find_shop',ty=fal[2]) }}">
+        <img class="images" style="width:150px ;height:150px" src="{{ fal[0] }}">
+        <h4>{{ fal[2] }}</h4>
+        <h5>RS - {{ fal[3] }}</h5>
+        <h5>Available {{fal[4]}} {{ fal[5] }} </h5>
+        <div>
+            <button type="button" class="btn btn-danger my-cart-btn"><i class="glyphicon glyphicon-shopping-cart"></i> Add to cart</button>
+            <a href="#" class="btn btn-info">Buy Now</a>
+            </a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

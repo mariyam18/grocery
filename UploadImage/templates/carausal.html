@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block carausal %}
+<div class="container">
+  <div class="row">
+    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+        <div class="MultiCarousel-inner">
+            <div class="item">
+                <div class="pad15">
+                 <img style="width: 70px; height: 70px;"  src="{{ url_for('static/uploads/',filename='fruits.jpg')}}">
+                 <h5>Fruits&Vegetables</h5>
+                </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/grocery&staples.jpg">
+                <h5>Grocery&Staples</h5>
+            </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/household.jpg">
+                <h5>Household Needs</h5>
+            </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/personal.jpg">
+                <h5>Personal Care</h5>
+            </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/beverages.jpg">
+                <h5>Beverages</h5>
+            </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/baby.jpg">
+                <h5>Baby&Kids</h5>
+            </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                  <img style="width: 70px; height: 70px;"  src="img/snacks.jpg">
+                  <h5>Snacks&Chocolates</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/Noodle.jpg">
+                <h5>Noodles&Instant Food</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/breakfast.jpg">
+                <h5>Breakfast&Dairy</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/home.jpg">
+                <h5>Home&Kitchen</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;"  src="img/pet.jpg">
+                <h5>Pet Care</h5>
+              </div>
+            </div>
+            <div class="item">
+              <div class="pad15">
+                <img style="width: 70px; height: 70px;" src="img/frozen.jpg">
+                <h5>Frozen Food</h5>
+              </div>
+            </div>
+        </div>
+        <button class="btn btn-primary leftLst"><</button>
+        <button class="btn btn-primary rightLst">></button>
+    </div>
+  </div>
+ </div>
+{% endblock %}

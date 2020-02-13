@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+            <div class="row shop-tracking-status">
+    
+                    <div class="outerr col-md-12">
+                        <div class="statusbox">
+                            {% for orderkey in odrer_id.keys() %}
+                            <h2>Your order status --></h2>
+                                    <h2>Order id : {{orderkey}}</h2>
+                                {% set i=0 %}
+                                {% for key,value in product1.items() %}
+                                <div class="row shop-tracking-status">
+    
+                                        <div class="outer col-md-12">
+                                            <div class="statusbox">
+                                <div class="order-status">
+                                <div>
+                                    <div class="track">
+                                    <div class="shop-name">
+                                        <h3>Shop name : {{ key }}</h3>
+                                        <h3>Shop Address : {{product2[key][0][8]}} ,{{ product2[key][0][9]}}</h3>
+                                    </div>
+                                    {% for temp in value %}
+                                      <div class="track2">  
+                                        <div class="pro">
+                                            Product Name : {{ temp[0] }} </br>
+                                            Product Price : {{ temp[1] }} </br>
+                                            Product quantity : {{ temp[2] }} </br>
+                                            Product Total Price : {{ temp[1] }} X  {{ temp[2] }} = {{ temp[3] }}
+                                        </div>
+                                        <div class="timeline-outer">
+                                        <div class="timeline">
+                                            <div class="order-status-timeline">
+                                                    <!-- class names: c0 c1 c2 c3 and c4 -->
+                                                {% if temp[4] == 0 %}
+                                                    <div class="order-status-timeline-completion c0"></div>
+                                                {% elif temp[4] == 1 %}
+                                                    <div class="order-status-timeline-completion c1"></div>
+                                                {% elif temp[4] == 2 %}
+                                                    <div class="order-status-timeline-completion c2"></div>
+                                                {% elif temp[4] == 3 %}
+                                                    <div class="order-status-timeline-completion c3"></div>
+                                                {% elif temp[4] == 4 %}
+                                                    <div class="order-status-timeline-completion c4"></div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="image-order-status image-order-status-new active img-circle">
+                                                    <span class="status">Accepted</span>
+                                                    <div class="icon"></div>
+                                            </div>
+                                            <div class="image-order-status image-order-status-active active img-circle">
+                                                <span class="status">In progress</span>
+                                                <div class="icon"></div>
+                                            </div>
+                                            <div class="image-order-status image-order-status-intransit active img-circle">
+                                                <span class="status">Shipped</span>
+                                                <div class="icon"></div>
+                                            </div>
+                                            <div class="image-order-status image-order-status-delivered active img-circle">
+                                                <span class="status">Delivered</span>
+                                                <div class="icon"></div>
+                                            </div>
+                                            <div class="image-order-status image-order-status-completed active img-circle">
+                                                <span class="status">Completed</span>
+                                                <div class="icon"></div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                
+                </div>
+{% endblock %}
