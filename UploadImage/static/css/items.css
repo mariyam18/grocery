@@ -1,0 +1,122 @@
+
+.fruit-cart{
+    background-color: white;
+    display: inline-block;
+  }
+
+.images{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    
+     
+}
+.avail{
+    color: grey;
+    font-size: large;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.detail{
+    background-color: white;
+    height: 400px;
+    position: inherit;
+}
+
+/*Product find outer div*/
+  .text-center{
+    background-color: white;
+    padding: 10px;
+    border-color: lightgray;
+    border-width: 15px; 
+    left: 300px;
+    width: 330px;
+    
+
+  }
+/* Product fid inner div */
+  .inner-product{
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: lightgray;
+    padding: 10px;
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    padding-bottom: 0px;
+  }
+
+
+  .main{
+    background-color: white;
+    height: 550px;
+    width: 90%;
+    left: 70px;
+    top: 25px ;
+    
+  }
+
+  
+/*Product find outer div*/
+  .outer{
+     padding: 50px; 
+    
+     
+  }
+  
+  .sidebar-fixed {
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: white;
+    position: fixed;
+    overflow: auto;
+    left: 2px;
+  }
+  
+  .sidebar-fixed a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+   
+  .sidebar-fixed a.active {
+    background-color: #46a093;
+    color: white;
+  }
+  
+  .sidebar-fixed a:hover:not(.active) {
+    background-color: #6bbd98;
+    color: white;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar-fixed {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar-fixed a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar-fixed a {
+      text-align: center;
+      float: none;
+    }
+  }
+
+  
+
+
+

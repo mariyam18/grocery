@@ -516,7 +516,6 @@ def spice():
     return render_template('spice.html')
 
 
-#mariyam
 @app.route('/prod')
 def Index():
     cur = mysql.connection.cursor()
@@ -528,7 +527,6 @@ def Index():
 
 
 
-#mariyam
 @app.route('/insert', methods = ['POST'])
 def insert():
 
@@ -566,7 +564,6 @@ def insert():
 
 
 
-#mariyam
 @app.route('/delete/<string:id_data>', methods = ['GET'])
 def delete(id_data):
     flash("Record Has Been Deleted Successfully")
@@ -578,7 +575,6 @@ def delete(id_data):
 
 
 
-#mariyam
 @app.route('/update',methods=['POST','GET'])
 def update():
 
@@ -597,7 +593,6 @@ def update():
         mysql.connection.commit()
         return redirect(url_for('Index'))
 
-#mariyam
 @app.route('/orderdetail')
 def orderdetail():
     lis = []
@@ -622,12 +617,10 @@ def orderdetail():
 
 
 
-#mariyam
 @app.route('/send',methods=['POST','GET'])
 def send():
 	return render_template('sendotp.html')
 
-#mariyam
 @app.route('/sendotp',methods=['POST','GET'])
 def sendotp():
 	if request.method == 'POST':
@@ -641,7 +634,6 @@ def sendotp():
 		print(response.text)
 	return render_template('confirmotp.html')
 
-#mariyam
 @app.route('/confirmotp',methods=['POST','GET'])
 def confirmotp():
 	if request.method == 'POST':
@@ -653,14 +645,56 @@ def confirmotp():
 	return render_template('confirmotp.html')
 
 
-#mariyam
 def generate_code():
     return str(random.randrange(10000, 99999))
 
 
     
 
+@app.route('/shopreg',methods=['POST'])
+def shopreg():
+    #flash("Data Inserted Successfully")
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        shopname = request.form['shopname']
+        name = request.form['name']
+        number = request.form['number']
+        email = request.form['email']
+        dob = request.form['dob']
+        shopadd = request.form['shopadd']
+        city = request.form['city']
+        district = request.form['district']
+        state = request.form['state']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO Shopkeeper (shop_name,shopkeeper_contact ,shopkeeper_name, shopkeeper_dob,shopkeeper_email,shop_add,shop_city,shop_district,shop_state) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)",(name, number,shopname, dob,email,shopadd,city,district,state))
+        mysql.connection.commit()
+    return render_template('shopregister.html')
+
+'''
+        file = request.files['file']
+        print(file)
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        print(allowed_file(file.filename))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            #name,file_extension = os.path.splitext(filename)
+            #print(name)
+            #print(file_extension)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],name+'.jpg'))
+            print(file.filename)
+	    #os.rename(UPLOAD_FOLDER +filename,UPLOAD_FOLDER +'bear.jpg')
+        
+        return redirect(url_for('Index'))
+'''
+
+
+
+
 
 
 if __name__ == '__main__':
-    app.run(port=5002,debug=True)
+    app.run(port=5003,debug=True)

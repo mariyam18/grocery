@@ -1,0 +1,88 @@
+{% include "base.html" %}
+{% block reg %}
+
+
+
+<div class="modal-body">
+
+
+    <form action="{{ url_for('shopreg') }}" method="POST" enctype="multipart/form-data">
+
+
+       <div class="form-group">
+          <label>Shop Name:</label>
+          <input type="text" class="form-control" name="shopname" required="1">
+       </div>
+
+
+        <div class="form-group">
+          <label> Shopkeeper Name:</label>
+          <input type="text" class="form-control" name="name" required="1">
+       </div>
+
+       <div>
+
+       </div>
+        <div class="form-group">
+          <label>Phone Number:</label>
+          <input type="text" class="form-control" name="number" required="1">
+       </div>
+
+    </div>
+
+    <div class="form-group">
+    
+    <label for="Email">Email</label>
+    
+    <input type="email" class="form-control" name="email" id="email" required = "1" >
+    </div>
+
+    <div class="form-group">
+
+        <label for="dob">Date of birth</label>
+        <input type="date" class="form-control" data-date="" data-date-format="DD MMMM YYYY" name="dob" id="dob" required = "1"  >
+        
+        </div>
+        <div class="form-group">
+            <label> Shop Address:</label>
+            <input type="text" class="form-control" name="shopadd" required="1">
+         </div> 
+
+         <div class="form-group">
+            <label> Shop City:</label>
+            <input type="text" class="form-control" name="city" required="1">
+         </div>
+
+         <div class="form-group">
+            <label> Shop District:</label>
+            <input type="text" class="form-control" name="district" required="1">
+         </div>
+
+         <div class="form-group">
+            <label> Shop State:</label>
+            <input type="text" class="form-control" name="state" required="1">
+         </div>
+
+        <div class="form-group">
+        <label for="image">Shop Image</label>
+        
+        <input type="file" name="shopimage" />  
+        
+        </div>
+
+
+       <div class="form-group">
+
+
+          <button class="btn btn-primary" type="submit">Insert Data</button>
+
+
+       </div>
+
+
+    </form>
+
+
+ </div>
+
+ {% endblock %}
