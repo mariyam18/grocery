@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block try %}
+
+
+<div class="container">
+    <div><h1 style="font-size: 30px">Delivery Address</h1></div>
+    <form method='POST' action="{{ url_for('tryadd') }}" class="signUp">
+      <div class="row">
+        <div class="col-25">
+          <label for="subject" style="display: inline-block; max-width: 100%; margin-bottom: 5px;font-weight: normal; font-size: 20px; position: relative; top: 10px ">Address line 01</label>
+        </div>
+        <div class="col-75">
+          <input id="subject" name="lane1"  value="{{prod.0.0}}" style="height:50px; font-size: 20px ;position: relative;top: 60px; float: inherit; right: 265px;"></input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subject" style="display: inline-block; max-width: 100%; margin-bottom: 5px;font-weight: normal; font-size: 20px; ">Address line 02</label>
+        </div>
+        <div class="col-75">
+          <input id="subject" name="lane2" value="{{prod.0.1}}"  style="height:50px; width:50px font-size: 20px ;position: relative;top: 60px; float: inherit; right: 265px;"></input>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-25">
+            <label for="subject" style="display: inline-block; max-width: 100%; margin-bottom: 5px;font-weight: normal; font-size: 20px; ">City</label>
+          </div>
+          <div class="col-75">
+            <input id="subject" name="city"  value="{{prod.0.2}}"  style="height:50px; font-size: 20px ;position: relative;top: 60px; float: inherit; right: 265px;"></input>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="subject" style="display: inline-block; max-width: 100%; margin-bottom: 5px;font-weight: normal; font-size: 20px; ">State</label>
+            </div>
+            <div class="col-75">
+              <input id="subject" name="state"  value="{{prod.0.3}}"  style="height:50px; font-size: 20px ;position: relative;top: 60px; float: inherit; right: 265px;;"></input>
+            </div>
+          </div>
+         
+      <div class="row">
+          <div class="col-25">
+              <label for="subject">Payment mode</label>
+            </div>
+            <div class="col-75">
+              <label for="subject">Cash on Delivery</label>
+            </div>
+      </div>
+      <div class="row">
+          <button class="form-btn" style="background-color: #46a093; font-size: medium; color: white; padding: 10px; border: #46a093;" type="submit">Place Order</button>
+      </div>
+    </form>
+</div>
+{%endblock%}
